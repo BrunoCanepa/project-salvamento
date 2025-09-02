@@ -1,18 +1,18 @@
-import { Container, Typography, Box, Button, Card, CardMedia, CardContent, CardActions, Modal } from "@mui/material";
+import { Container, Typography, Box, Button, Modal, Card, CardActions } from "@mui/material";
 import { useState } from "react";
 
 export default function ViewScreen() {
-  // Producto de ejemplo
   const producto = {
     id: 1,
     nombre: "Camiseta deportiva",
-    descripcion: "Camiseta cómoda de algodón, ideal para entrenamientos o uso diario.",
-    precio: 250,
-    imagen: "/img/camiseta.png",
-    moneda: "UYU",
-    stock: 12,
-    unidad: "m²",
-    publicadoEn: "Instagram",
+    descripcion:
+      "Camiseta cómoda de algodón, ideal para entrenamientos o uso diario.",
+    precio: 29.99,
+    imagenes: [
+      "/img/camiseta.png",
+      "/img/gorra.png",
+      "/img/zapatos.png",
+    ],
   };
 
   const style = {
@@ -30,40 +30,60 @@ export default function ViewScreen() {
   };
 
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleCloseModal = () => setOpen(false); 
+  const handleOpenModal = () => setOpen(true); 
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Card>
-        <CardMedia
+    <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
+      {/* Galería de imágenes */}
+      <Box
+      sx={{
+        display: "flex",
+        gap: 2,
+        flexWrap: "wrap",
+        justifyContent: "center",
+        mb: 3,
+      }}
+    >
+      {producto.imagenes.map((img, index) => (
+        <Box
+          key={index}
           component="img"
-          height="250"
-          image={producto.imagen}
-          alt={producto.nombre}
-          sx={{ objectFit: "cover" }}
+          src={img}
+          alt={`${producto.nombre}-${index}`}
+          sx={{
+            maxWidth: 400,   // ancho máximo permitido
+            height: "auto",  // mantiene proporción original
+            borderRadius: 2,
+            boxShadow: 2,
+          }}
         />
-        <CardContent>
-          <Typography variant="h5" gutterBottom>
-            {producto.nombre}
-          </Typography>
-          <Typography variant="body1" color="text.secondary" paragraph>
-            {producto.descripcion}
-          </Typography>
-          <Typography variant="h6" >
-            Precio: ${producto.precio} {producto.moneda}
-          </Typography>
-          <Typography variant="h6" >
-            Stock: {producto.stock} {producto.unidad}
-          </Typography>
-          <Typography variant="h6" >
-            Publicado en: {producto.publicadoEn}
-          </Typography>
-        </CardContent>
-        <CardActions sx={{ justifyContent: "flex-end" }}>
-          <Button variant="outlined" color="primary"> Editar </Button>
-          <Button variant="outlined" color="error" onClick={handleOpen} > Eliminar </Button>
-          <Modal open={open} onClose={handleClose} >
+      ))}
+    </Box>
+
+
+      {/* Información del producto */}
+      <Box sx={{ textAlign: "center", mb: 4 }}>
+        <Typography variant="h3" gutterBottom>
+          {producto.nombre}
+        </Typography>
+        <Typography variant="h6" color="text.secondary" paragraph>
+          {producto.descripcion}
+        </Typography>
+        <Typography variant="h4" color="primary" gutterBottom>
+          ${producto.precio}
+        </Typography>
+      </Box>
+
+      {/* Acciones */}
+      <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
+        <Button variant="contained" color="primary">
+          Editar
+        </Button>
+        <Button variant="outlined" color="error" onClick={handleOpenModal} >
+          Eliminar
+        </Button>
+        <Modal open={open} onClose={handleCloseModal} >
             <Card sx={style}>
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Eliminar producto
@@ -72,14 +92,12 @@ export default function ViewScreen() {
                 Estás seguro de que quieres eliminar este producto?
               </Typography>
               <CardActions sx={{ justifyContent: "center", height: "100%" }} >
-                <Button color="success" variant="outlined" onClick={handleClose} >Cancelar</Button>
+                <Button color="success" variant="outlined" onClick={handleCloseModal} >Cancelar</Button>
                 <Button color="error" variant="outlined" >Eliminar</Button>
               </CardActions>
             </Card>
           </Modal>
-        </CardActions>
-      </Card>
-
+      </Box>
     </Container>
   );
 }

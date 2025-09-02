@@ -31,14 +31,14 @@ async function getProductById(req, res) {
 async function createProduct(req, res) {
     try {
 
-        const { name, description, image, price, currency, stock, unit, publishedOn } = req.body;
+        const { name, description, image, price, currency, stock, unit, publishedon } = req.body;
 
         if (!name) {
             return res.status(400).json({ message: 'El nombre es obligatorio' });
         }
 
         const newProduct = await ProductService.createProduct({
-            name, description, image, price, currency, stock, unit, publishedOn
+            name, description, image, price, currency, stock, unit, publishedon
         });
 
         if (newProduct) {

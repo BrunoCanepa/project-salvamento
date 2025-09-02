@@ -30,7 +30,7 @@ ProductModel.init(
     unit: {
       type: DataTypes.STRING,
     },
-    publishedOn: {
+    publishedon: {
       type: DataTypes.STRING,
     },
 

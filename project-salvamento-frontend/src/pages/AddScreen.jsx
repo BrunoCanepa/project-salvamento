@@ -1,16 +1,30 @@
-import { TextField, Button, Container, Typography, Box, IconButton, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
+import { TextField, Button, Container, Typography, Box, IconButton, Select, MenuItem, InputLabel, FormControl, RadioGroup, Radio, FormControlLabel, FormLabel } from '@mui/material';
 import { useState } from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import { use } from 'react';
 
 export default function AddScreen() {
     const [images, setImages] = useState([]);
+    const [publishedOn, setPublishedOn] = useState([]);
 
     const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setImages(files.map(file => URL.createObjectURL(file)));
   };
+
+  const handlePublishedOnChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPublishedOn(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+    console.log(publishedOn);
+  };
+
   return (
-    <Container maxWidth="xl" sx={{ display: 'flex', flexDirection: 'row', gap: 2, mt: 4, marginBottom: "2rem" }} >
+    <Container maxWidth="xl" sx={{ display: 'flex', flexDirection: 'row', gap: 2, mt: 4, marginBottom: "2rem", justifyContent: "center" }} >
       <Box sx={{  width:"60%" }} >
       <a href='/..' >MainScreen</a>
       <Typography variant="h5" gutterBottom>
@@ -54,8 +68,17 @@ export default function AddScreen() {
               <MenuItem value={"dolares"}>Dólares</MenuItem>
               <MenuItem value={"pesos"}>Pesos</MenuItem>
             </Select>
-          </FormControl>
+          </FormControl> 
         </Box >
+
+        <FormControl>
+          <FormLabel color='black' > Tipo de Precio </FormLabel>
+            <RadioGroup row >
+              <FormControlLabel value={"unidad"} control={<Radio color='' />} label="Precio por unidad" />
+              <FormControlLabel value={"m2"} control={<Radio color='' />} label="Precio por m²" />
+              <FormControlLabel value={"lote"} control={<Radio color='' />} label="Precio por lote" />
+            </RadioGroup>
+        </FormControl>
 
         <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }} >
           <TextField
@@ -81,8 +104,9 @@ export default function AddScreen() {
           <InputLabel id="publishedOn" >Publicado en...</InputLabel>
           <Select
               labelId='publishedOn'
-              label="Publicado en..."
-              /*onChange={handleChange}*/
+              multiple
+              value={publishedOn}
+              onChange={handlePublishedOnChange}
             >
               <MenuItem value={"marketPlace"}>Market Place</MenuItem>
               <MenuItem value={"instagram"}>Instagram</MenuItem>

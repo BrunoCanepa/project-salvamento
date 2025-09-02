@@ -3,10 +3,10 @@ const ProductModel = require("../models/productModel")
 
 async function createProduct(data) {
     try {
-        const { name, description, image, price, currency, stock, unit, publishedOn } = data;
+        const { name, description, image, price, currency, stock, unit, publishedon } = data;
 
         const newProduct = await ProductModel.create({
-            name, description, image, price, currency, stock, unit, publishedOn
+            name, description, image, price, currency, stock, unit, publishedon
         });
 
         return newProduct;
