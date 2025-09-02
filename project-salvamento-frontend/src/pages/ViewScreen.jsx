@@ -13,6 +13,11 @@ export default function ViewScreen() {
       "/img/gorra.png",
       "/img/zapatos.png",
     ],
+    moneda: "Dolares",
+    stock: 20,
+    unidad: "Unidades",
+    publicadoEn: ["Instagram", "Mercado Libre"],
+
   };
 
   const style = {

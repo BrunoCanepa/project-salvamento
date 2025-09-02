@@ -71,15 +71,6 @@ export default function AddScreen() {
           </FormControl> 
         </Box >
 
-        <FormControl>
-          <FormLabel color='black' > Tipo de Precio </FormLabel>
-            <RadioGroup row >
-              <FormControlLabel value={"unidad"} control={<Radio color='' />} label="Precio por unidad" />
-              <FormControlLabel value={"m2"} control={<Radio color='' />} label="Precio por m²" />
-              <FormControlLabel value={"lote"} control={<Radio color='' />} label="Precio por lote" />
-            </RadioGroup>
-        </FormControl>
-
         <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }} >
           <TextField
           label="Stock"
@@ -144,3 +135,41 @@ export default function AddScreen() {
           <img key={i} src={src} alt={`preview-${i}`} width={100} height={100} />
         ))}
       </div>*/
+
+    /*id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
+    name: {
+      type: DataTypes.STRING,
+    },
+    description: {
+      type: DataTypes.STRING,
+    },
+    image: {
+      type: DataTypes.STRING,
+    },
+    price: {
+      type: DataTypes.INTEGER,
+    },
+    currency: {
+      type: DataTypes.STRING,
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+    },
+    unit: {
+      type: DataTypes.STRING,
+    },
+    publishedon: {
+      type: DataTypes.STRING,
+    },
+
+    <FormControl>
+          <FormLabel color='black' > Tipo de Precio </FormLabel>
+            <RadioGroup row >
+              <FormControlLabel value={"unidad"} control={<Radio color='' />} label="Precio por unidad" />
+              <FormControlLabel value={"m2"} control={<Radio color='' />} label="Precio por m²" />
+              <FormControlLabel value={"lote"} control={<Radio color='' />} label="Precio por lote" />
+            </RadioGroup>
+        </FormControl>*/
